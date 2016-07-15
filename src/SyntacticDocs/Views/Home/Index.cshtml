@@ -1,39 +1,48 @@
 @{
     ViewData["Title"] = "Home Page";
 }
+	       
+<div class="col-md-3 sidebar">          
+	<form method="GET" role="search">                
+		<input type="text" class="form-control" placeholder="Search for...">                               
+	</form>  
+	<ul class="nav nav-pills nav-stacked">
+		<li class="active"><a href="#">Home</a></li>
+		<li><a href="#">Link</a></li>
+		<li><a href="#">Link</a></li>
+		<li><a href="#">Link</a></li>
+		<li><a href="#">Link</a></li>
+	</ul>
+</div>
+<div class="col-md-9 content">
 
+	<div class="row">        
+        <ol class="breadcrumb bread-primary ">
+          	<li><i class="fa fa-book"></i> Home</li>
+            <li><a href="#">TOPICS</a></li>            
+        </ol>
+		<hr class="hr-primary" />
+    </div>
 
-	<div style="margin-top:10px;">       
-		<div class="col-md-3 sidebar">          
-            <form method="GET" role="search" style="margin-bottom:10px;">
-                <div class="input-group">
-                    <input type="text" class="form-control" placeholder="Search for...">
-                    <span class="input-group-btn">
-                        <button class="btn btn-default" type="button">Go!</button>
-                    </span>
-                </div>
-            </form>  
-			<ul class="nav nav-pills nav-stacked">
-				<li class="active"><a href="#">Home</a></li>
-				<li><a href="#">Link</a></li>
-				<li><a href="#">Link</a></li>
-				<li><a href="#">Link</a></li>
-				<li><a href="#">Link</a></li>
-			</ul>
-		</div>
-		<div class="col-md-9 content">
-            <div class="panel panel-default">
-                <div class="panel-heading">
-                    Dashboard
-                </div>
-                <div class="panel-body">
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-    			    tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-				quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-				consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-				cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-				proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-                </div>
-            </div>
-		</div>
-	</div>
+	<h1>Core of Brand</h1>
+
+	<p>	
+		Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod 
+		tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.
+	</p>	
+
+	<img width="300px" src="http://1.bp.blogspot.com/-T11xFbFhOSQ/UmTFctgfNVI/AAAAAAAAEGs/O4_4ue-qkdk/s1600/Brand+Essence+Construct.jpg" 
+	alt="">
+
+	<pre><code class="javascript">var x = "Hello World"; 
+hljs.initHighlightingOnLoad();</code></pre>
+
+	<p>	
+		Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod 
+		tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.
+	</p>
+
+	<img src="https://binalparekh.files.wordpress.com/2014/04/encapsulation.jpg" alt="">
+	<pre><code class="c#">private string x = "Hello World"; 
+public string  Name {get; set;}</code></pre>
+</div>

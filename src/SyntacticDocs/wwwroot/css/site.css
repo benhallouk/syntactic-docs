@@ -1,50 +1,95 @@
+@import url(//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css);
+
+html, body, .container-fluid{
+    height: 100%;
+    padding:0;        
+}
+
+body {
+    color: #222222;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+}
+.navbar-inverse {
+    background: #212436;
+}
+.navbar-inverse .navbar-nav>li>a, .navbar-inverse .navbar-brand {
+    color: #fff;
+}
+
+.sidebar {
+    height: 100%;
+    background: #2f3242;
+    padding-top: 10px;
+    padding: 0;    
+    overflow: hidden;
+}
+.sidebar input {
+    border-radius: 0 !important;
+    background: #212436;
+    border: none;
+}
 body {
     padding-top: 50px;
-    padding-bottom: 20px;
+}
+.navbar {
+    padding-left: 20px;
+    padding-right: 20px;
 }
 
-/* Wrapping element */
-/* Set some basic padding to keep content from hitting the edges */
-.body-content {
-    padding-left: 15px;
-    padding-right: 15px;
+.sidebar form {
+    padding: 20px;
+}
+.sidebar .nav {
+    background: #001E40;   
+    height: 100%;    
+}
+.sidebar .nav a {
+    color: #9d9d9d;
+    padding-top: 4px;
+    padding-bottom: 4px;
+}
+.sidebar .nav a:hover, .sidebar .nav a:active, .sidebar .nav a:focus {
+    background: #100B29;
+    color: #9d9d9d;
+    border-radius: 0;
+}
+.sidebar .nav .active a, .sidebar .nav .active a:active, .sidebar .nav .active a:focus {
+    background: #100B29 !important;
+    color: #9d9d9d;
+    border-radius: 0;
+}
+.content {    
+    padding: 100px;
+    padding-top:20px;
+    height: 100%;
+    overflow: auto;
 }
 
-/* Set widths on the form inputs since otherwise they're 100% wide */
-input,
-select,
-textarea {
-    max-width: 280px;
+hr {
+  height: 4px;
+  margin-left: 15px;
+  margin-top:-20px;
 }
 
-/* Carousel */
-.carousel-caption p {
-    font-size: 20px;
-    line-height: 1.4;
+.hr-primary{
+  background-image: -webkit-linear-gradient(left, rgba(33, 76, 125,.8), rgba(33, 76, 125,.6), rgba(0,0,0,0));
 }
 
-/* buttons and links extension to use brackets: [ click me ] */
-.btn-bracketed::before {
-    display:inline-block;
-    content: "[";
-    padding-right: 0.5em;
-}
-.btn-bracketed::after {
-    display:inline-block;
-    content: "]";
-    padding-left: 0.5em;
+.breadcrumb {
+  background: rgba(245, 245, 245, 0); 
+  border: 0px solid rgba(245, 245, 245, 1); 
+  border-radius: 25px; 
+  display: block;
 }
 
-/* Make .svg files in the carousel display properly in older browsers */
-.carousel-inner .item img[src$=".svg"]
-{
-    width: 100%;
+.breadcrumb>.active {
+    color: #222222;
 }
 
-/* Hide/rearrange for smaller screens */
-@media screen and (max-width: 767px) {
-  /* Hide captions */
-  .carousel-caption {
-    display: none
-  }
+.breadcrumb>li+li:before {
+    color: #222222;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-weight: normal;
 }
