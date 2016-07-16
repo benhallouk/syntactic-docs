@@ -108,3 +108,7 @@ pre {
     margin-top: 6px;
     margin-bottom: 6px;
 }
+
+.btn {
+    border-radius: 0; 
+}
