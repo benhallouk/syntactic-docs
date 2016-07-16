@@ -13,16 +13,16 @@ else
     LOG_BODY="\n---\n\n## [$(git tag -l | grep 'v' | tail -1)](https://github.com/benhallouk/syntactic-docs/tree/$(git tag -l | grep 'v' | tail -1)) - $(date +%Y-%m-%d) \n"
 
     LOG_BODY="$LOG_BODY\n### :bulb: New Features"
-    LOG_BODY="$LOG_BODY\n$(git log --pretty=format:'- %s' --grep 'feat(' | awk -F ':' '{print $0}' | sort $1)\n"
+    LOG_BODY="$LOG_BODY\n$(git log --pretty=format:'- [%s](https://github.com/benhallouk/syntactic-docs/commit/%H) %b' --grep 'feat(' | awk -F ':' '{print $0}' | sort $1)\n"
 
     LOG_BODY="$LOG_BODY\n### :beetle: Fixed Issues"
-    LOG_BODY="$LOG_BODY\n$(git log --pretty=format:'- %s' --grep 'fix(' | awk -F ':' '{print $0}' | sort $1)\n"
+    LOG_BODY="$LOG_BODY\n$(git log --pretty=format:'- [%s](https://github.com/benhallouk/syntactic-docs/commit/%H) %b' --grep 'fix(' | awk -F ':' '{print $0}' | sort $1)\n"
 
     LOG_BODY="$LOG_BODY\n### :chart_with_upwards_trend: Test Improvment"
-    LOG_BODY="$LOG_BODY\n$(git log --pretty=format:'- %s' --grep 'test(' | awk -F ':' '{print $0}' | sort $1)\n"
+    LOG_BODY="$LOG_BODY\n$(git log --pretty=format:'- [%s](https://github.com/benhallouk/syntactic-docs/commit/%H) %b' --grep 'test(' | awk -F ':' '{print $0}' | sort $1)\n"
 
     LOG_BODY="$LOG_BODY\n### :thought_balloon: Other Improvment"
-    LOG_BODY="$LOG_BODY\n$(git log --pretty=format:'- %s' --grep 'build(\|ci(\|refactor(' | awk -F ':' '{print $0}' | sort $1)\n"
+    LOG_BODY="$LOG_BODY\n$(git log --pretty=format:'- [%s](https://github.com/benhallouk/syntactic-docs/commit/%H) %b' --grep 'build(\|ci(\|refactor(' | awk -F ':' '{print $0}' | sort $1)\n"
 
     LOG_OLD_CHANGES="\n$(tail -n +5 ChangeLog.md)"
 
