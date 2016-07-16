@@ -25,7 +25,7 @@ body {
     overflow: scroll;
     border-right: #1aa9a3 1px solid;
 }
-.sidebar input {
+.form-control{
     border-radius: 0 !important;
     background: #fff;
     border: #1aa9a3 1px solid;
