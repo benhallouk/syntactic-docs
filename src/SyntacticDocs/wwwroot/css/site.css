@@ -10,7 +10,8 @@ body {
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
 }
 .navbar-inverse {
-    background: #212436;
+    background: #1aa9a3;
+    border: none;
 }
 .navbar-inverse .navbar-nav>li>a, .navbar-inverse .navbar-brand {
     color: #fff;
@@ -18,15 +19,17 @@ body {
 
 .sidebar {
     height: 100%;
-    background: #2f3242;
+    background: #ffffff;
     padding-top: 10px;
-    padding: 0;    
+    padding: 0;
     overflow: scroll;
+    border-right: #1aa9a3 1px solid;
 }
 .sidebar input {
     border-radius: 0 !important;
-    background: #212436;
-    border: none;
+    background: #fff;
+    border: #1aa9a3 1px solid;
+    box-shadow: none;
 }
 body {
     padding-top: 50px;
@@ -39,22 +42,20 @@ body {
 .sidebar form {
     padding: 20px;
 }
-.sidebar .nav {
-    background: #001E40;    
-}
+
 .sidebar .nav a {
-    color: #9d9d9d;
+    color: #5896c9;
     padding-top: 4px;
     padding-bottom: 4px;
 }
 .sidebar .nav a:hover, .sidebar .nav a:active, .sidebar .nav a:focus {
-    background: #100B29;
-    color: #9d9d9d;
+    background: #5896c9 !important;
+    color: #fff;
     border-radius: 0;
 }
 .sidebar .nav .active a, .sidebar .nav .active a:active, .sidebar .nav .active a:focus {
-    background: #100B29 !important;
-    color: #9d9d9d;
+    background: #5896c9 !important;
+    color: #fff;
     border-radius: 0;
 }
 .content {    
@@ -71,7 +72,8 @@ hr {
 }
 
 .hr-primary{
-  background-image: -webkit-linear-gradient(left, rgba(33, 76, 125,.8), rgba(33, 76, 125,.6), rgba(0,0,0,0));
+  background-image: -webkit-linear-gradient(left, rgba(26, 169, 163,.8), rgba(26, 169, 163,.6), rgba(0,0,0,0));
+      border-top: none;
 }
 
 .breadcrumb {
@@ -81,14 +83,18 @@ hr {
   display: block;
 }
 
+.breadcrumb li {
+    color: #1aa9a3;
+}
 .breadcrumb>.active {
-    color: #222222;
+    color: #1aa9a3;
 }
 
 .breadcrumb>li+li:before {
-    color: #222222;
+    color: #1aa9a3;
 }
 
 h1, h2, h3, h4, h5, h6 {
     font-weight: normal;
+    color:#5896c9;
 }
