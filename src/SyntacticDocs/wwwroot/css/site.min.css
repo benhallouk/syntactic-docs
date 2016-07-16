@@ -29,7 +29,10 @@ body {
     border-radius: 0 !important;
     background: #fff;
     border: #1aa9a3 1px solid;
+}
+.form-control:focus {
     box-shadow: none;
+    transition: none;
 }
 body {
     padding-top: 50px;
