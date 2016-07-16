@@ -31,8 +31,7 @@
 		tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.
 	</p>	
 
-	<img width="300px" src="http://www.vector-eps.com/wp-content/gallery/office-work-technology-and-infographics-flat-design/technology-devices-flat-design3.jpg" 
-	alt="">
+	<p><img width="300px" src="http://www.vector-eps.com/wp-content/gallery/office-work-technology-and-infographics-flat-design/technology-devices-flat-design3.jpg" alt=""></p>
 
 	<pre><code class="javascript">var x = "Hello World"; 
 hljs.initHighlightingOnLoad();</code></pre>
@@ -42,7 +41,31 @@ hljs.initHighlightingOnLoad();</code></pre>
 		tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.
 	</p>
 
-	<img src="https://binalparekh.files.wordpress.com/2014/04/encapsulation.jpg" alt="">
-	<pre><code class="c#">private string x = "Hello World"; 
-public string  Name {get; set;}</code></pre>
+	<p><img src="https://binalparekh.files.wordpress.com/2014/04/encapsulation.jpg" alt=""></p>
+	<pre><code class="c#">public class HomeController : Controller
+{
+	public IActionResult Index()
+	{
+		return View();
+	}
+
+	public IActionResult About()
+	{
+		ViewData["Message"] = "Your application description page.";
+
+		return View();
+	}
+
+	public IActionResult Contact()
+	{
+		ViewData["Message"] = "Your contact page.";
+
+		return View();
+	}
+
+	public IActionResult Error()
+	{
+		return View();
+	}
+}</code></pre>
 </div>
