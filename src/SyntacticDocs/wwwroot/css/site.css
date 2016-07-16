@@ -112,3 +112,7 @@ pre {
 .btn {
     border-radius: 0; 
 }
+
+.full-content {
+    margin: 40px 100px 10px 100px;
+}
