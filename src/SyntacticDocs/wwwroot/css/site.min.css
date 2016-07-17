@@ -26,6 +26,7 @@ body {
 }
 .sidebar .form-control {
     border-radius: 14px !important;
+    border: none;
 }
 .form-control{
     border-radius: 0 !important;
