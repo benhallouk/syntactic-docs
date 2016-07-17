@@ -44,6 +44,18 @@ body {
     padding-right: 20px;
 }
 
+.navbar-brand {
+    padding-left: 40px;
+}
+.navbar-brand .icon {
+    position: absolute;
+    width: 32px;
+    height: 27px;
+    top: 10px;
+    left: 12px;
+    background: url(/images/docs.png) no-repeat; 
+}
+
 .sidebar form {
     padding: 20px;
 }
