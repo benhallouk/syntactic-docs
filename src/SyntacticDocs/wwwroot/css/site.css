@@ -52,6 +52,7 @@ body {
     color: #1aa9a3;
     padding-top: 4px;
     padding-bottom: 4px;
+    font-weight: bold;
 }
 .sidebar .nav a:hover, .sidebar .nav a:active, .sidebar .nav a:focus {
     background: #1aa9a3 !important;
