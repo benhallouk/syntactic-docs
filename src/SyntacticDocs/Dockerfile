@@ -1,6 +1,6 @@
 FROM microsoft/dotnet:latest
 
-RUN apt-get update && apt-get install sqlite3 libsqlite3-dev
+RUN apt-get update && apt-get -y install sqlite3 libsqlite3-dev
 
 COPY . /app
 
