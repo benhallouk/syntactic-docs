@@ -155,3 +155,29 @@ pre {
     background-color: #5896c9;
     border:none;
 }
+
+.editor-toolbar {
+    background: #1aa9a3;
+    color: #fff;
+    opacity: 1 !important;
+    border-top-left-radius: 0 !important;
+    border-top-right-radius: 0 !important;
+    border-top: none;
+    border-left: none;
+}
+.editor-toolbar a {
+    color: #fff !important;
+    border: none;
+}
+.editor-toolbar a.active, .editor-toolbar a:hover {
+    background: #fcfcfc;
+    color: #1aa9a3 !important;
+    border:none;
+}
+.editor-toolbar.disabled-for-preview a:not(.no-disable) {    
+    background: #1aa9a3;
+}
+.CodeMirror {
+    border-bottom-left-radius: 0 !important;
+    border-bottom-right-radius: 0 !important;
+}
