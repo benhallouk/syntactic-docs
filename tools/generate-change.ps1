@@ -11,19 +11,31 @@ else{
 
     $LOG_BODY = $NewLine+"---"+$NewLine+$NewLine+"## ["+$ChangeVersion+"](https://github.com/benhallouk/syntactic-docs/tree/$"+$ChangeVersion+") - " + $(Get-Date -format "yyyy-MM-dd").ToString() + $NewLine
     
-    $LOG_BODY += $NewLine + "### :bulb: New Features"
-    $LOG_BODY += $NewLine + $(git log --pretty=format:'- [%s](https://github.com/benhallouk/syntactic-docs/commit/%H) %b'  | where {$_ -like '- `[feat(*):*'} | Out-String)
+    $NewFeatures = git log --pretty=format:'- [%s](https://github.com/benhallouk/syntactic-docs/commit/%H) %b'  | where {$_ -like '- `[feat(*):*'} | Out-String
+    if($NewFeatures){
+        $LOG_BODY += $NewLine + "### :bulb: New Features"
+        $LOG_BODY += $NewLine + $NewFeatures
+    }
+     
 
-    $LOG_BODY += $NewLine + $NewLine + "### :beetle: Fixed Issues"
-    $LOG_BODY += $NewLine + $(git log --pretty=format:'- [%s](https://github.com/benhallouk/syntactic-docs/commit/%H) %b'   | where {$_ -like '- `[fix(*):*'} | Out-String)
+    $FixedIssues = git log --pretty=format:'- [%s](https://github.com/benhallouk/syntactic-docs/commit/%H) %b'   | where {$_ -like '- `[fix(*):*'} | Out-String
+    if($FixedIssues){
+        $LOG_BODY += $NewLine + $NewLine + "### :beetle: Fixed Issues"
+        $LOG_BODY += $NewLine + $FixedIssues
+    }    
 
-    $LOG_BODY += $NewLine + $NewLine + "### :chart_with_upwards_trend: Test Improvment"
-    $LOG_BODY += $NewLine + $(git log --pretty=format:'- [%s](https://github.com/benhallouk/syntactic-docs/commit/%H) %b'   | where {$_ -like '- `[test(*):*'} | Out-String)
+    $TestImprovment = git log --pretty=format:'- [%s](https://github.com/benhallouk/syntactic-docs/commit/%H) %b'   | where {$_ -like '- `[test(*):*'} | Out-String
+    if($TestImprovment){
+        $LOG_BODY += $NewLine + $NewLine + "### :chart_with_upwards_trend: Test Improvment"
+        $LOG_BODY += $NewLine + $TestImprovment
+    }    
 
-    $LOG_BODY += $NewLine + $NewLine + "### :thought_balloon: Other Improvment"
-    $LOG_BODY += $NewLine + $(git log --pretty=format:'- [%s](https://github.com/benhallouk/syntactic-docs/commit/%H) %b'   | where { ($_ -like '- `[build(*):*') -or ($_ -like '- `[ci(*):*') -or ($_ -like '- `[refactor(*):*') } | Out-String)
-    
-    
+    $OtherImprovment = git log --pretty=format:'- [%s](https://github.com/benhallouk/syntactic-docs/commit/%H) %b'   | where { ($_ -like '- `[build(*):*') -or ($_ -like '- `[ci(*):*') -or ($_ -like '- `[refactor(*):*') } | Out-String
+    if($OtherImprovment){
+        $LOG_BODY += $NewLine + $NewLine + "### :thought_balloon: Other Improvment"
+        $LOG_BODY += $NewLine + $OtherImprovment
+    }    
+        
     $LOG_OLD_CHANGES = $NewLine + $(Get-Content ChangeLog.md | select -skip 4 | Out-String)
 
     $LOG_HEADER+$LOG_BODY+$LOG_OLD_CHANGES > ChangeLog.md
