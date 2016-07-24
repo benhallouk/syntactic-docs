@@ -1,16 +1,19 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using SyntacticDocs.Services;
 
 namespace SyntacticDocs.Controllers
 {
     public class HomeController : Controller
     {
+        private DocumentService _documentService;
+        public HomeController(DocumentService documentService)
+        {
+          _documentService = documentService;
+        }
         public IActionResult Index()
         {
-            return View();
+            var mainDocument = _documentService.GetDocument("main");
+            return View(mainDocument);
         }
 
         public IActionResult About()
