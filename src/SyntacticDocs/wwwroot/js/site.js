@@ -15,5 +15,10 @@ $(document).ready(function(){
         return false;
     });            
     $('#back-to-top').tooltip('show');
-    var simplemde = new SimpleMDE({ element: $("#simple-mde-demo")[0] });
+    var markdownEditor = null;
+    $("#edit-document-btn").click(function(){
+        markdownEditor = markdownEditor || new SimpleMDE({ element: $("#markdown-editor")[0] });        
+        $("#markdown-view-mode").toggle();
+        $("#markdown-edit-mode").toggle();
+    });
 });

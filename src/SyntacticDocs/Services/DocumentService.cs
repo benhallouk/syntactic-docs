@@ -14,14 +14,9 @@ namespace SyntacticDocs.Services
             _db = db;
         }
 
-        public IEnumerable<Document> GetMainDocuments()
+        public Document GetDocument(string alias)
         {
-            return _db.Docs;
-        }
-
-        public Document GetDocument(string title)
-        {
-            return _db.Docs.FirstOrDefault(doc=>doc.Title==title);
+            return _db.Docs.FirstOrDefault(doc=>doc.Alias==alias);
         }
 
         public IEnumerable<Document> GetRelatedDocuments(Document document)

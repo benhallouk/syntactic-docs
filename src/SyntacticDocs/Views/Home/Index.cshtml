@@ -1,4 +1,4 @@
-@model SyntacticDocs.Models.Document
+@model SyntacticDocs.ViewModels.PageViewModel
 
 @{
     ViewData["Title"] = "Home Page";
@@ -9,11 +9,14 @@
 		<input type="text" class="form-control" placeholder="Search for...">                               
 	</form>  
 	<ul class="nav nav-pills nav-stacked">
-		<li class="active"><a href="#">Home</a></li>
-		@foreach(var doc in Model.Documents)
+		<li class="active"><a href="/">Home</a></li>
+		@if(Model.Navigation!=null)
 		{
-			<li><a href="#">@doc.Title</a></li>
-		}
+			foreach(var doc in Model.Navigation)
+			{
+				<li><a href="/home/index/@doc.Alias">@doc.Title</a></li>
+			}
+		}	
 	</ul>
 </div>
 <div class="col-md-9 content">
@@ -21,61 +24,18 @@
 	<div class="row">        
         <ol class="breadcrumb bread-primary ">
           	<li><i class="fa fa-book"></i> Home</li>
-            <li><a href="#">TOPICS</a></li>            
+            <li><a href="#">TOPICS</a></li> 
+			<li><a id="edit-document-btn" href="javascript:void(0);"><i class="fa fa-pencil-square-o"></i></a></li>           
         </ol>
 		<hr class="hr-primary" />
     </div>
 
-	<markdown source="Content" />
-	
-	@Model.Title
+	<div id="markdown-view-mode">
+		<markdown source="Doc.Content" />
+	</div>
+	<div id="markdown-edit-mode">
+		<textarea id="markdown-editor">@Model.Doc.Content</textarea>
+	</div>
 
-	<h1>Core of Brand</h1>
-
-	<p>	
-		Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod 
-		tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.
-	</p>	
-
-	<p><img width="300px" src="http://www.vector-eps.com/wp-content/gallery/office-work-technology-and-infographics-flat-design/technology-devices-flat-design3.jpg" alt=""></p>
-
-	<textarea id="simple-mde-demo">@Model.Content</textarea>
-
-	<pre><code class="javascript">var x = "Hello World"; 
-hljs.initHighlightingOnLoad();</code></pre>
-
-	<p>	
-		Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod 
-		tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.
-	</p>
-
-	<p><img src="https://binalparekh.files.wordpress.com/2014/04/encapsulation.jpg" alt=""></p>
-	<pre><code class="c#">public class HomeController : Controller
-{
-	public IActionResult Index()
-	{
-		return View();
-	}
-
-	public IActionResult About()
-	{
-		ViewData["Message"] = "Your application description page.";
-
-		return View();
-	}
-
-	public IActionResult Contact()
-	{
-		ViewData["Message"] = "Your contact page.";
-
-		return View();
-	}
-
-	public IActionResult Error()
-	{
-		return View();
-	}
-}</code></pre>
-
-<a id="back-to-top" href="#" class="btn btn-primary back-to-top" role="button" title="Click to return on the top page" data-toggle="tooltip" data-placement="left"><span class="glyphicon glyphicon-chevron-up"></span></a>
+	<a id="back-to-top" href="#" class="btn btn-primary back-to-top" role="button" title="Click to return on the top page" data-toggle="tooltip" data-placement="left"><span class="glyphicon glyphicon-chevron-up"></span></a>
 </div>

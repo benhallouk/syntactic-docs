@@ -44,8 +44,9 @@ namespace SyntacticDocs.Data
         private async Task createDataAsync()
         {
             _db.Docs.Add(new Document{
-                Title = "main",
-                Content = @"# Intro
+                Alias = "main",
+                Title = "Main",
+                Content = @"# Main Intro
 Go ahead, play around with the editor! Be sure to check out **bold** and *italic* styling, or even [links](http://google.com). You can type the Markdown syntax, use the toolbar, or use shortcuts like `cmd-b` or `ctrl-b`.
 
 ## Lists
@@ -65,8 +66,9 @@ Unordered lists can be started using the toolbar or by typing `* `, `- `, or `+ 
 ![Yes](http://i.imgur.com/sZlktY7.png)",
                 Documents = new List<Document>{
                     new Document{
-                Title = "Getting Started",
-                Content = @"# Intro
+                        Alias = "getting-started",
+                        Title = "Getting Started",                
+                        Content = @"# Getting Started
 Go ahead, play around with the editor! Be sure to check out **bold** and *italic* styling, or even [links](http://google.com). You can type the Markdown syntax, use the toolbar, or use shortcuts like `cmd-b` or `ctrl-b`.
 
 ## Lists

@@ -181,3 +181,17 @@ pre {
     border-bottom-left-radius: 0 !important;
     border-bottom-right-radius: 0 !important;
 }
+
+.breadcrumb li:last-of-type::before {
+    content: "";
+}
+.breadcrumb li:last-of-type {
+    font-size: 30px;
+    position: absolute;
+    top: 20px;
+    right: 100px;
+}
+
+#markdown-edit-mode{
+    display: none;
+}

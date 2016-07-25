@@ -1,5 +1,7 @@
+using System.Linq;
 using Microsoft.AspNetCore.Mvc;
 using SyntacticDocs.Services;
+using SyntacticDocs.ViewModels;
 
 namespace SyntacticDocs.Controllers
 {
@@ -10,10 +12,23 @@ namespace SyntacticDocs.Controllers
         {
           _documentService = documentService;
         }
-        public IActionResult Index()
+        public IActionResult Index(string path)
         {
+            string[] sections=null;
+            string alias = "main";
+            if (!string.IsNullOrEmpty(path))
+            {
+                sections = path.Split(new char[] { '/' }, System.StringSplitOptions.RemoveEmptyEntries);
+                alias = sections.LastOrDefault();
+            }
+
             var mainDocument = _documentService.GetDocument("main");
-            return View(mainDocument);
+            var pageDocument = _documentService.GetDocument(alias);
+            var pageViewModel = new PageViewModel{
+                Navigation = mainDocument.Documents,
+                Doc = pageDocument
+            };
+            return View(pageViewModel);
         }
 
         public IActionResult About()
