@@ -1,14 +1,17 @@
 # ![SyntacticDocs](https://raw.githubusercontent.com/benhallouk/syntactic-docs/master/src/SyntacticDocs/wwwroot/images/docs.png) SyntacticDocs [![Build status](https://ci.appveyor.com/api/projects/status/v5adj5ofyspdevu1?svg=true)](https://ci.appveyor.com/project/benhallouk/syntactic-docs)
 
-Welcome to the `SyntacticDocs`, the place where the technical documentations take a shape 
+Welcome to the `SyntacticDocs`, the place where the technical documentations take a shape,
+`SyntacticDocs` is markdown based library that helps you and your team to get ahead the documentation by provding an easy way to handel the documents in a modern and collaborative way using `Markdown` syntax
 
-Go ahead, play around with this tool! Be sure to check out **document creation** using  predefined **templates** using the **Markdown** syntax, use **the editor toolbar**, or use shortcuts like `cmd-b` or `ctrl-b`.
+![SyntacticDocs](https://raw.githubusercontent.com/benhallouk/syntactic-docs/master/src/SyntacticDocs/wwwroot/images/syntactic-docs-devices.png)
 
-## Getting Started
 
-This guide can help you to get started with the `SyntacticDocs`
 
-### Create your document
+## Features
+
+The `SyntacticDocs` provides many modern features that are designed to address the problems that we have today with the technical documentations
+
+### Create documentation style based on a topic
 
 Weather you want to describes handling, functionality or architecture of your product or documenting a product under development or use, the `SyntacticDocs` is just designed to help you do that.
 
@@ -16,7 +19,7 @@ It makes it very simple to create **technical documentations** of any type using
 
 ### Have it everywhere
 
-Once your document is saved, and it's **instantly available** across all your devices and even if are **offline**. Never worry about where you saved something because it's in one single location in the `SyntacticDocs`. You can start on your laptop then update your document on your tablet and review it on your phone.  All the workflow is available on **any device and any platform**.
+Once your documention is saved, and it's **instantly available** across all your devices and even if are **offline**. Never worry about where you saved something because it's in one single location in the `SyntacticDocs`. You can start on your laptop then update your document on your tablet and review it on your phone.  All the workflow is available on **any device and any platform**.
 
 ### Collaborate with anyone
 
