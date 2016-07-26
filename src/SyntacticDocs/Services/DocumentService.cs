@@ -23,5 +23,13 @@ namespace SyntacticDocs.Services
         {
             return _db.Docs.Where(doc=>doc.Tags.Any(tag=>document.Tags.Contains(tag)));
         }
+
+        public Document Save(Document document)
+        {
+            var oldDocument = _db.Docs.FirstOrDefault(doc=>doc.Id==document.Id);
+            oldDocument.Content = document.Content;
+            _db.SaveChanges();
+            return oldDocument;
+        }
     }
 }

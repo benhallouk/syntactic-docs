@@ -2,6 +2,7 @@ using System.Linq;
 using Microsoft.AspNetCore.Mvc;
 using SyntacticDocs.Services;
 using SyntacticDocs.ViewModels;
+using SyntacticDocs.Models;
 
 namespace SyntacticDocs.Controllers
 {
@@ -29,6 +30,11 @@ namespace SyntacticDocs.Controllers
                 Doc = pageDocument
             };
             return View(pageViewModel);
+        }
+
+        public Document Save(Document document)
+        {
+            return _documentService.Save(document);            
         }
 
         public IActionResult About()

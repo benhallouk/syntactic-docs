@@ -195,3 +195,24 @@ pre {
 #markdown-edit-mode{
     display: none;
 }
+
+.modal-header {    
+    border-bottom: none;
+    background: #1aa9a3;
+}
+.modal-header .close {    
+    color: #fff;
+    opacity: 1;
+}
+.modal-header h4 {
+    color: #fff;
+}
+.modal-footer {
+    border-top:none;
+}
+.btn-primary{    
+    background-color: #1aa9a3;
+}
+.btn-primary:hover{
+    background-color: #5896c9;
+}

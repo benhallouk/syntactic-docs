@@ -39,3 +39,25 @@
 
 	<a id="back-to-top" href="#" class="btn btn-primary back-to-top" role="button" title="Click to return on the top page" data-toggle="tooltip" data-placement="left"><span class="glyphicon glyphicon-chevron-up"></span></a>
 </div>
+
+<div id="save-confirmation" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="save-confirmation-label">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close" onClick="syntacticDocs.cancelChanges();"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="save-confirmation-label">Save confirmation</h4>
+      </div>
+      <div class="modal-body">
+		You are about to save this document, do you want to continue?
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" onClick="syntacticDocs.cancelChanges();" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary" onClick="syntacticDocs.saveCurrentDocument();">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
+@section scripts
+{
+	<script>syntacticDocs.currentDocument = {id: @Model.Doc.Id,content: ""}</script>
+}
