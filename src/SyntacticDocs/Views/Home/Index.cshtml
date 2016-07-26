@@ -9,12 +9,16 @@
 		<input type="text" class="form-control" placeholder="Search for...">                               
 	</form>  
 	<ul class="nav nav-pills nav-stacked">
-		<li class="active"><a href="/">Home</a></li>
+		<li class='@(string.IsNullOrEmpty(ViewContext.RouteData.Values["path"] as string) ? "active" : "")'>
+			<a href="/">Home</a>
+		</li>
 		@if(Model.Navigation!=null)
 		{
 			foreach(var doc in Model.Navigation)
 			{
-				<li><a href="/home/index/@doc.Alias">@doc.Title</a></li>
+				<li class='@(doc.Alias == ViewContext.RouteData.Values["path"] as string ? "active" : "")'>
+					<a href="/home/index/@doc.Alias">@doc.Title</a>
+				</li>
 			}
 		}	
 	</ul>
@@ -28,7 +32,7 @@
 			<li><a id="edit-document-btn" href="javascript:void(0);"><i class="fa fa-pencil-square-o"></i></a></li>           
         </ol>
 		<hr class="hr-primary" />
-    </div>
+    </div>		
 
 	<div id="markdown-view-mode">
 		<markdown source="Doc.Content" />
