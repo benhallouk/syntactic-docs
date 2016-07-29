@@ -1,4 +1,11 @@
 var syntacticDocs = syntacticDocs || (function () {
+    var showBacktoTop = function(element){
+        if ($(element).scrollTop() > 50) {
+            $('#back-to-top').fadeIn();
+        } else {
+            $('#back-to-top').fadeOut();
+        }
+    };
     return {
         currentDocument: {},
         cancelChanges: function(){
@@ -12,16 +19,15 @@ var syntacticDocs = syntacticDocs || (function () {
         init: function(){ 
             hljs.initHighlightingOnLoad();
             $(document).ready(function(){
-                $(".content").scroll(function () {
-                    if ($(this).scrollTop() > 50) {
-                        $('#back-to-top').fadeIn();
-                    } else {
-                        $('#back-to-top').fadeOut();
-                    }
+                $(".content").scroll(function () {                    
+                    showBacktoTop(this);
                 });            
+                $(window).scroll(function(){                    
+                    showBacktoTop(this);
+                });  
                 $('#back-to-top').click(function () {
                     $('#back-to-top').tooltip('hide');
-                    $('.content').animate({
+                    $('.content,body').animate({
                         scrollTop: 0
                     }, 800);
                     return false;
@@ -41,5 +47,4 @@ var syntacticDocs = syntacticDocs || (function () {
         }
     };
 })();
-
 syntacticDocs.init();
