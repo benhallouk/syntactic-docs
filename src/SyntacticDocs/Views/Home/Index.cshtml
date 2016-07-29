@@ -78,7 +78,7 @@
 		<markdown source="Doc.Content" />
 	</div>
 	<div id="markdown-edit-mode">
-		<textarea id="markdown-editor">@Model.Doc.Content</textarea>
+		<textarea id="markdown-editor">@Model.Doc?.Content</textarea>
 	</div>
 
 	<a id="back-to-top" href="#" class="btn btn-primary back-to-top" role="button" title="Click to return on the top page" data-toggle="tooltip" data-placement="left"><span class="glyphicon glyphicon-chevron-up"></span></a>
@@ -103,5 +103,5 @@
 </div>
 @section scripts
 {
-	<script>syntacticDocs.currentDocument = {id: @Model.Doc.Id,content: ""}</script>
+	<script>syntacticDocs.currentDocument = {id: @Model.Doc?.Id,content: ""}</script>
 }

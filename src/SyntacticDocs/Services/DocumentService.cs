@@ -7,11 +7,12 @@ namespace SyntacticDocs.Services
 {
     public class DocumentService
     {
-        private ApplicationDbContext _db;
+        private readonly ApplicationDbContext _db;
 
         public DocumentService(ApplicationDbContext db)
         {
             _db = db;
+            _db.SeedData();            
         }
 
         public Document GetDocument(string alias)

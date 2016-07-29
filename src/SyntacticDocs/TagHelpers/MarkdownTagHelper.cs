@@ -17,7 +17,7 @@ namespace SyntacticDocs.TagHelpers
             var markdownTransformer = new Markdown();
             if (Source != null)
             {
-                Text = Source.Model.ToString();
+                Text = Source.Model?.ToString();
             }
 
             var result = markdownTransformer.Transform(Text);

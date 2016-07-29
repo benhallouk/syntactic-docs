@@ -26,7 +26,7 @@ namespace SyntacticDocs.Controllers
             var mainDocument = _documentService.GetDocument("main");
             var pageDocument = _documentService.GetDocument(alias);
             var pageViewModel = new PageViewModel{
-                Navigation = mainDocument.Documents,
+                Navigation = mainDocument?.Documents,
                 Doc = pageDocument
             };
             return View(pageViewModel);
