@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using System.Linq;
 using SyntacticDocs.Models;
 using SyntacticDocs.Data;
+using Microsoft.EntityFrameworkCore;
 
 namespace SyntacticDocs.Services
 {
@@ -17,7 +18,9 @@ namespace SyntacticDocs.Services
 
         public Document GetDocument(string alias)
         {
-            return _db.Docs.FirstOrDefault(doc=>doc.Alias==alias);
+            return _db.Docs
+                .Include(doc => doc.Documents)
+                .FirstOrDefault(doc=>doc.Alias==alias);
         }
 
         public IEnumerable<Document> GetRelatedDocuments(Document document)

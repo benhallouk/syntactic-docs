@@ -9,7 +9,7 @@ namespace SyntacticDocs.Models
         public string Title { get; set; }
         public string Content { get; set; }
 
-        public ICollection<Tag> Tags { get; set; } = new List<Tag>();
-        public ICollection<Document> Documents { get; set; } = new List<Document>();    
+        public ICollection<Tag> Tags { get; set; }
+        public ICollection<Document> Documents { get; set; }
     }
 }
