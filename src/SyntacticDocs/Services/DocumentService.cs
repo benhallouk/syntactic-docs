@@ -12,7 +12,7 @@ namespace SyntacticDocs.Services
 
         public DocumentService(ApplicationDbContext db)
         {
-            _db = db;
+            _db = db;            
             _db.SeedData();            
         }
 
@@ -20,7 +20,9 @@ namespace SyntacticDocs.Services
         {
             return _db.Docs
                 .Include(doc => doc.Documents)
-                .FirstOrDefault(doc=>doc.Alias==alias);
+                .ThenInclude(doc => doc.Documents)
+                .Where(doc => doc.Alias==alias)
+                .Single();                
         }
 
         public IEnumerable<Document> GetRelatedDocuments(Document document)
