@@ -263,3 +263,56 @@ pre {
 .btn-primary:hover{
     background-color: #5896c9;
 }
+
+.sidebar h3{
+    padding: 0px 15px;        
+    margin: 0;
+    color: #e59a0c;
+}
+#current-search a{
+    color:#5896c9;
+    font-size: 12px;
+}
+#tags{
+    white-space: normal;        
+    padding: 2px 15px;
+    line-height: 22px;
+    font-size: 8px;
+}
+#tags a{
+    word-wrap: break-word;    
+    margin-right:4px;
+}
+.tagcloud_size_0 {
+    font-size: 80%;
+}
+.tagcloud_size_1 {
+    font-size: 90%;
+}
+.tagcloud_size_2 {
+    font-size: 100%;
+}
+.tagcloud_size_3 {
+    font-size: 110%;
+}
+.tagcloud_size_4 {
+    font-size: 120%;
+}
+.tagcloud_size_5 {
+    font-size: 130%;
+}
+.tagcloud_size_6 {
+    font-size: 140%;
+}
+.tagcloud_size_7 {
+    font-size: 150%
+}
+.tagcloud_size_8 {
+    font-size: 160%;
+}
+.tagcloud_size_9 {
+    font-size: 170%;
+}
+.tagcloud_size_10 {
+    font-size: 180%;
+}

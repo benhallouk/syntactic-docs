@@ -1,0 +1,294 @@
+
+<div id="search" class="col-sm-3 sidebar">
+    <form method="GET" role="search" onsubmit="return false;">                
+		<input type="text" class="form-control" placeholder="Search for...">                               
+	</form>
+	<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".nav-stacked">
+			<span class="sr-only">Toggle navigation</span>
+			<span class="icon-bar"></span>
+			<span class="icon-bar"></span>
+			<span class="icon-bar"></span>
+	</button>
+    <h3>Current search</h3>
+    <ul id="current-search" class="nav nav-pills nav-stacked"></ul>
+    <h3>Tags</h3>
+    <p id="tags"></p>
+</div>
+<div class="col-sm-9 content">
+    <nav aria-label="Page navigation">
+        <ul id="pager" class="pagination"></ul>    
+    </nav>
+    <div id="docs"></div>
+</div>
+@section scripts
+{
+	<script src="http://evolvingweb.github.io/ajax-solr/core/Core.js"></script>
+    <script src="http://evolvingweb.github.io/ajax-solr/core/AbstractManager.js"></script>
+    <script src="http://evolvingweb.github.io/ajax-solr/managers/Manager.jquery.js"></script>
+    <script src="http://evolvingweb.github.io/ajax-solr/core/Parameter.js"></script>
+    <script src="http://evolvingweb.github.io/ajax-solr/core/ParameterStore.js"></script>
+    <script src="http://evolvingweb.github.io/ajax-solr/core/AbstractWidget.js"></script>
+    <script src="http://evolvingweb.github.io/ajax-solr/widgets/jquery/PagerWidget.js"></script>
+    <script src="http://evolvingweb.github.io/ajax-solr/core/AbstractFacetWidget.js"></script>
+    <script src="http://evolvingweb.github.io/ajax-solr/core/AbstractTextWidget.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.24/jquery-ui.min.js"></script>
+
+    <script>
+    var Manager;
+    (function ($) {
+        $(function () {
+            Manager = new AjaxSolr.Manager({
+            solrUrl: 'http://localhost:8983/solr/SyntacticDocs/'
+            });
+            Manager.addWidget(new AjaxSolr.ResultWidget({
+                id: 'result',
+                target: '#docs'
+            }));
+            Manager.addWidget(new AjaxSolr.PagerWidget({
+                id: 'pager',
+                target: '#pager',
+                prevLabel: '&lt;',
+                nextLabel: '&gt;',
+                innerWindow: 1,
+                renderHeader: function (perPage, offset, total) {
+                    $('#pager-header').html($('<span></span>').text('displaying ' + Math.min(total, offset + 1) + ' to ' + Math.min(total, offset + perPage) + ' of ' + total));
+                }
+            }));            
+            Manager.addWidget(new AjaxSolr.CurrentSearchWidget({
+                id: 'currentsearch',
+                target: '#current-search',
+            }));
+            Manager.addWidget(new AjaxSolr.TagcloudWidget({
+                id: "tags",
+                target: '#tags',
+                field: "title"
+            }));            
+            Manager.addWidget(new AjaxSolr.AutocompleteWidget({
+                id: 'text',
+                target: '#search',
+                fields: [ 'title', 'content']
+            }));
+            Manager.init();
+            Manager.store.addByValue('q', '*:*');
+            var params = {
+                facet: true,
+                'facet.field': ['title'],
+                'facet.limit': 20,
+                'facet.mincount': 1,
+                'f.topics.facet.limit': 50,
+                'json.nl': 'map'
+            };
+            for (var name in params) {
+                Manager.store.addByValue(name, params[name]);
+            }
+            Manager.doRequest();
+        });
+
+        AjaxSolr.AutocompleteWidget = AjaxSolr.AbstractTextWidget.extend({
+            afterRequest: function () {
+                $(this.target).find('input').unbind().removeData('events').val('');
+
+                var self = this;
+
+                var callback = function (response) {
+                var list = [];
+                for (var i = 0; i < self.fields.length; i++) {
+                    var field = self.fields[i];
+                    for (var facet in response.facet_counts.facet_fields[field]) {
+                        list.push({
+                            field: field,
+                            value: facet,
+                            label: facet + ' (' + response.facet_counts.facet_fields[field][facet] + ') - ' + field
+                        });
+                    }
+                }
+
+                self.requestSent = false;
+                $(self.target).find('input').autocomplete('destroy').autocomplete({
+                    source: list,
+                    select: function(event, ui) {
+                        if (ui.item) {
+                            self.requestSent = true;
+                            if (self.manager.store.addByValue('fq', ui.item.field + ':' + AjaxSolr.Parameter.escapeValue(ui.item.value))) {
+                            self.doRequest();
+                            }
+                        }
+                    },                    
+                    open: function() {                        
+                        var width = $('#search').find('input')[0].clientWidth;                        
+                        $('.ui-autocomplete').addClass('dropdown-menu').css('maxWidth',width+'px');
+                    }
+                });
+
+                // This has lower priority so that requestSent is set.
+                $(self.target).find('input').bind('keydown', function(e) {
+                    if (self.requestSent === false && e.which == 13) {
+                    var value = $(this).val();
+                    if (value && self.set(value)) {
+                        self.doRequest();
+                    }
+                    }
+                });
+                } // end callback
+
+                var params = [ 'rows=0&facet=true&facet.limit=-1&facet.mincount=1&json.nl=map' ];
+                for (var i = 0; i < this.fields.length; i++) {
+                params.push('facet.field=' + this.fields[i]);
+                }
+                var values = this.manager.store.values('fq');
+                for (var i = 0; i < values.length; i++) {
+                params.push('fq=' + encodeURIComponent(values[i]));
+                }
+                params.push('q=' + this.manager.store.get('q').val());
+                $.getJSON(this.manager.solrUrl + 'select?' + params.join('&') + '&wt=json&json.wrf=?', {}, callback);
+            }
+        });
+
+
+        AjaxSolr.CurrentSearchWidget = AjaxSolr.AbstractWidget.extend({
+            start: 0,
+            afterRequest: function () {
+                var self = this;
+                var links = [];
+
+                var q = this.manager.store.get('q').val();
+                if (q != '*:*') {
+                links.push($('<a href="#"></a>').text('(x) ' + q).click(function () {
+                    self.manager.store.get('q').val('*:*');
+                    self.doRequest();
+                    return false;
+                }));
+                }
+
+                var fq = this.manager.store.values('fq');
+                for (var i = 0, l = fq.length; i < l; i++) {
+                links.push($('<a href="#"></a>').text('(x) ' + fq[i]).click(self.removeFacet(fq[i])));
+                }
+
+                if (links.length > 1) {
+                links.unshift($('<a href="#"></a>').text('remove all').click(function () {
+                    self.manager.store.get('q').val('*:*');
+                    self.manager.store.remove('fq');
+                    self.doRequest();
+                    return false;
+                }));
+                }
+
+                if (links.length) {
+                var $target = $(this.target);
+                $target.empty();
+                for (var i = 0, l = links.length; i < l; i++) {
+                    $target.append($('<li></li>').append(links[i]));
+                }
+                }
+                else {
+                $(this.target).html('<li><a href="#">Viewing all documents!</a></li>');
+                }
+            },
+
+            removeFacet: function (facet) {
+                var self = this;
+                return function () {
+                if (self.manager.store.removeByValue('fq', facet)) {
+                    self.doRequest();
+                }
+                return false;
+                };
+            }
+        });
+
+        AjaxSolr.TagcloudWidget = AjaxSolr.AbstractFacetWidget.extend({
+            afterRequest: function () {
+                if (this.manager.response.facet_counts.facet_fields[this.field] === undefined) {
+                $(this.target).html('<li><a href="#">no items found in current selection</a></li>');
+                return;
+                }
+
+                var maxCount = 0;
+                var objectedItems = [];
+                for (var facet in this.manager.response.facet_counts.facet_fields[this.field]) {
+                var count = parseInt(this.manager.response.facet_counts.facet_fields[this.field][facet]);
+                if (count > maxCount) {
+                    maxCount = count;
+                }
+                objectedItems.push({ facet: facet, count: count });
+                }
+                objectedItems.sort(function (a, b) {
+                return a.facet < b.facet ? -1 : 1;
+                });
+
+                $(this.target).empty();
+                for (var i = 0, l = objectedItems.length; i < l; i++) {
+                var facet = objectedItems[i].facet;
+                $(this.target).append(
+                    $('<a href="#" class="tagcloud_item"></a>')
+                    .text(facet)
+                    .addClass('tagcloud_size_' + parseInt(objectedItems[i].count / maxCount * 10))
+                    .click(this.clickHandler(facet))
+                );
+                }
+            }
+        });
+
+
+        AjaxSolr.ResultWidget = AjaxSolr.AbstractWidget.extend({
+            start: 0,
+            beforeRequest: function () {
+                $(this.target).html($('<p style="text-align: center;"><i class="fa fa-refresh fa-spin fa-3x fa-fw margin-bottom"></i></p>'));
+            },
+            facetLinks: function (facet_field, facet_values) {
+                var links = [];
+                if (facet_values) {
+                for (var i = 0, l = facet_values.length; i < l; i++) {
+                    if (facet_values[i] !== undefined) {
+                    links.push(
+                        $('<a href="#"></a>')
+                        .text(facet_values[i])
+                        .click(this.facetHandler(facet_field, facet_values[i]))
+                    );
+                    }
+                    else {
+                    links.push('no items found in current selection');
+                    }
+                }
+                }
+                return links;
+            },            
+            facetHandler: function (facet_field, facet_value) {
+                var self = this;
+                return function () {
+                self.manager.store.remove('fq');
+                self.manager.store.addByValue('fq', facet_field + ':' + AjaxSolr.Parameter.escapeValue(facet_value));
+                self.doRequest(0);
+                return false;
+                };
+            },
+            afterRequest: function () {
+                $(this.target).empty();
+                for (var i = 0, l = this.manager.response.response.docs.length; i < l; i++) {
+                    var doc = this.manager.response.response.docs[i];
+                    $(this.target).append(this.template(doc));
+                }
+            },
+            template: function (doc) {
+                var snippet = '';
+                if (doc.content.length > 300) {
+                    snippet += doc.dateline + ' ' + doc.content.substring(0, 300);
+                    snippet += '<span style="display:none;">' + doc.content.substring(300);
+                    snippet += '</span> <a href="#" class="more">more</a>';
+                }
+                else {
+                    snippet += doc.dateline + ' ' + doc.content;
+                }
+
+                var output = '<div><h2>' + doc.title + '</h2>';
+                output += '<p id="links_' + doc.id + '" class="links"></p>';
+                output += '<p>' + snippet + '</p></div>';
+                return output;
+            }
+        });
+
+
+    })(jQuery);
+    </script>
+}
