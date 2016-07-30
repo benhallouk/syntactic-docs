@@ -21,8 +21,7 @@ namespace SyntacticDocs.Services
             return _db.Docs
                 .Include(doc => doc.Documents)
                 .ThenInclude(doc => doc.Documents)
-                .Where(doc => doc.Alias==alias)
-                .Single();                
+                .FirstOrDefault(doc => doc.Alias==alias);                
         }
 
         public IEnumerable<Document> GetRelatedDocuments(Document document)
