@@ -100,7 +100,8 @@
                         list.push({
                             field: field,
                             value: facet,
-                            label: facet + ' (' + response.facet_counts.facet_fields[field][facet] + ') - ' + field
+                            count: response.facet_counts.facet_fields[field][facet],
+                            label: facet
                         });
                     }
                 }
@@ -119,8 +120,14 @@
                     open: function() {                        
                         var width = $('#search').find('input')[0].clientWidth;                        
                         $('.ui-autocomplete').addClass('dropdown-menu').css('maxWidth',width+'px');
-                    }
-                });
+                    },                    
+                })    
+                .data("autocomplete")._renderItem = function (ul, item) {
+                    return $("<li>")
+                        .data("item.autocomplete", item)
+                        .append("<a>" + item.label + " <span class='badge' style='background:#337ab7;'>"+item.count+"</span> :"+item.field+"</a>")
+                        .appendTo(ul);
+                };
 
                 // This has lower priority so that requestSent is set.
                 $(self.target).find('input').bind('keydown', function(e) {
@@ -155,7 +162,7 @@
 
                 var q = this.manager.store.get('q').val();
                 if (q != '*:*') {
-                links.push($('<a href="#"></a>').text('(x) ' + q).click(function () {
+                links.push($('<a href="#"></a>').html('<i class="fa fa-times-circle text-danger" aria-hidden="true"></i> ' + q).click(function () {
                     self.manager.store.get('q').val('*:*');
                     self.doRequest();
                     return false;
@@ -164,11 +171,11 @@
 
                 var fq = this.manager.store.values('fq');
                 for (var i = 0, l = fq.length; i < l; i++) {
-                links.push($('<a href="#"></a>').text('(x) ' + fq[i]).click(self.removeFacet(fq[i])));
+                links.push($('<a href="#"></a>').html('<i class="fa fa-times-circle text-danger" aria-hidden="true"></i> ' + fq[i]).click(self.removeFacet(fq[i])));
                 }
 
                 if (links.length > 1) {
-                links.unshift($('<a href="#"></a>').text('remove all').click(function () {
+                links.unshift($('<a href="#"></a>').html('<i class="fa fa-times-circle text-danger" aria-hidden="true"></i>  <span class="text-danger">Remove all</span>').click(function () {
                     self.manager.store.get('q').val('*:*');
                     self.manager.store.remove('fq');
                     self.doRequest();
@@ -275,17 +282,17 @@
             template: function (doc) {
                 var snippet = '';
                 if (doc.content.length > 300) {
-                    snippet += doc.dateline + ' ' + doc.content.substring(0, 300);
+                    snippet +=  doc.content.substring(0, 300);
                     snippet += '<span style="display:none;">' + doc.content.substring(300);
-                    snippet += '</span> <a href="#" class="more">more</a>';
+                    snippet += '</span> <a href="/home/index/'+doc.alias+'" class="more">more</a>';
                 }
                 else {
                     snippet += doc.dateline + ' ' + doc.content;
                 }
 
-                var output = '<div><h2>' + doc.title + '</h2>';
-                output += '<p id="links_' + doc.id + '" class="links"></p>';
-                output += '<p>' + snippet + '</p></div>';
+                var output = '<div><a href="/home/index/'+doc.alias+'"><h2>' 
+                + doc.title + '</a></h2>'                
+                + '<p>' + snippet + '</p></div>';
                 return output;
             }
         });
