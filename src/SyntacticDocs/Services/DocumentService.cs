@@ -10,11 +10,13 @@ namespace SyntacticDocs.Services
     public class DocumentService
     {
         private readonly ApplicationDbContext _db;
+        private readonly SearchService _searchService;
 
-        public DocumentService(ApplicationDbContext db)
+        public DocumentService(ApplicationDbContext db,SearchService searchService)
         {
             _db = db;            
-            _db.SeedData();            
+            _db.SeedData();
+            _searchService = searchService;
         }
 
         public Document GetDocument(string alias)
@@ -35,6 +37,7 @@ namespace SyntacticDocs.Services
             var parentDocument = _db.Docs.FirstOrDefault(doc=>doc.Id==parentId);
             parentDocument.Documents.Add(document);
             _db.SaveChanges();
+            _searchService.ImportData();
             return document;
         }
         public Document Save(Document document)
@@ -42,6 +45,7 @@ namespace SyntacticDocs.Services
             var oldDocument = _db.Docs.FirstOrDefault(doc=>doc.Id==document.Id);
             oldDocument.Content = document.Content;
             _db.SaveChanges();
+            _searchService.ImportData();
             return oldDocument;
         }
 
@@ -50,6 +54,7 @@ namespace SyntacticDocs.Services
             var oldDocument = _db.Docs.FirstOrDefault(doc=>doc.Id==document.Id);
             _db.Remove(oldDocument);
             _db.SaveChanges();
+            _searchService.ImportData();
             return document;
         }
     }

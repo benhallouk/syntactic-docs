@@ -40,7 +40,7 @@
     (function ($) {
         $(function () {
             Manager = new AjaxSolr.Manager({
-            solrUrl: 'http://localhost:8983/solr/SyntacticDocs/'
+            solrUrl: '@ViewData["SolrBaseUrl"]'
             });
             Manager.addWidget(new AjaxSolr.ResultWidget({
                 id: 'result',
