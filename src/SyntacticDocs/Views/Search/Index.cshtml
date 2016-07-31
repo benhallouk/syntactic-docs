@@ -71,7 +71,7 @@
                 fields: [ 'title', 'content']
             }));
             Manager.init();
-            Manager.store.addByValue('q', '*:*');
+            Manager.store.addByValue('q', '@Model');
             var params = {
                 facet: true,
                 'facet.field': ['title'],

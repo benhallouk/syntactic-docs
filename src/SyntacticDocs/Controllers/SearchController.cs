@@ -6,7 +6,8 @@ namespace SyntacticDocs.Controllers
     {
         public IActionResult Index(string keyword)
         {
-            return View(keyword);
+            keyword = string.IsNullOrEmpty(keyword) ? "*:*" : keyword;
+            return View("Index",keyword);
         }
 
         public IActionResult Error()
