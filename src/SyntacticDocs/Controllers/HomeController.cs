@@ -37,7 +37,7 @@ namespace SyntacticDocs.Controllers
             var document = new Document{
                 Alias = addData.Alias,
                 Title = addData.Title,
-                Content = "#"+addData.Title
+                Content = "# "+addData.Title
             };
             return _documentService.Add(document, addData.ParentId);
         }

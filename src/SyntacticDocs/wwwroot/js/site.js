@@ -20,7 +20,7 @@ var syntacticDocs = syntacticDocs || (function () {
                 title: title
             };
             $.post( "/home/add/", addData,function(data){
-                if(data && data.id) location.reload(true);
+                if(data && data.id) location.href =  location.pathname + "/" + alias;
             });
         },
         saveCurrentDocument: function(){
@@ -31,6 +31,9 @@ var syntacticDocs = syntacticDocs || (function () {
         deleteCurrentDocument: function(){
             $.post( "/home/delete/", syntacticDocs.currentDocument,function(data){
                 if(data && data.id) location.reload(true);
+                var path = location.pathname;
+                var index = location.pathname.lastIndexOf('/');
+                location.href = path.substr(0,index);
             });
         },
         init: function(){ 
