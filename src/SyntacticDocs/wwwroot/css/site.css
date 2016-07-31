@@ -79,6 +79,12 @@ body {
         height: auto !important;
         overflow: hidden !important;
     }
+    .editbar{
+        top: 130px;
+    }
+    .editbar .navbar-nav{
+        margin: 0;
+    }
 }
 .sidebar .nav a {
     color: #fff;
@@ -146,37 +152,61 @@ hr {
     margin-top:-20px;
 }
 
-.breadcrumb {
-    background: rgba(245, 245, 245, 0); 
-    border: 0px solid rgba(245, 245, 245, 1); 
-    border-radius: 25px; 
-    display: block;
+nav.editbar{
+    position: fixed;
+    z-index: 10;
+    right: 0;
+    padding: 0;
+    background: #fff;    
+    width: 200px;      
+    margin-right: -160px;
+    float: right;
+    margin-bottom: 0px;
+    -webkit-transition: margin 200ms ease-out;
+    -moz-transition: margin 200ms ease-out;
+    -o-transition: margin 200ms ease-out;
+    transition: margin 200ms ease-out;
 }
-
-.breadcrumb li {
-    color: #1aa9a3;
+nav.editbar:hover{
+    margin-right: 200px;
 }
-.breadcrumb>.active {
-    color: #1aa9a3;
+nav.editbar .navbar-nav > li{
+    border-bottom: 1px #e5e5e5 solid;
 }
-
-.breadcrumb>li+li:before {
-    color: #1aa9a3;
+nav.editbar .navbar-collapse, nav.editbar .container-fluid{
+    padding: 0 0px 0 0px;
 }
-
-#delete-document-btn{
-    font-size: 30px;
-    position: absolute;
-    right: 100px;
-    top: 100px;
+nav.editbar:hover{
+    margin-right: 0px;
+}
+nav.editbar li {
+    width: 100%;
+}
+nav.editbar a{
+    background-color: #fff !important;
 }
 #add-document-btn{
-    font-size: 20px;
-    position: absolute;
-    right: 104px;
-    top: 70px;
+    color: #5896c9;
+}
+#add-document-btn i{
+    padding-right: 20px;
+    font-size: 18px;        
+}
+#edit-document-btn{
     color: #1aa9a3;
 }
+#edit-document-btn i {
+    padding-right: 20px;
+    font-size: 18px;    
+}
+#delete-document-btn{
+    color: #c7254e;
+}
+#delete-document-btn i{
+    padding-right: 20px;
+    font-size: 18px;    
+}
+
 #add-document-btn:hover{
     text-decoration: none;
 }
@@ -248,16 +278,6 @@ pre {
 .CodeMirror {
     border-bottom-left-radius: 0 !important;
     border-bottom-right-radius: 0 !important;
-}
-
-.breadcrumb li:last-of-type::before {
-    content: "";
-}
-.breadcrumb li:last-of-type {
-    font-size: 30px;
-    position: absolute;
-    top: 20px;
-    right: 100px;
 }
 
 #markdown-edit-mode{

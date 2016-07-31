@@ -4,6 +4,7 @@
     ViewData["Title"] = "Home Page";		
 }
 	       
+@Html.Partial("~/Views/Home/Partials/_EditPanel.cshtml")
 
 <div class="col-sm-3 sidebar"> 	
 	<form method="GET" role="search" action="/search">                
@@ -20,21 +21,7 @@
 	</ul>  
 </div>
 
-<div class="col-sm-9 content">
-
-	<div class="row">        
-		<ol class="breadcrumb bread-primary ">
-			<li><i class="fa fa-book"></i> Home</li>
-			<li><a href="#">TOPICS</a></li> 
-			<li><a id="edit-document-btn" href="javascript:void(0);"><i class="fa fa-pencil-square-o"></i></a></li></li>           
-		</ol>
-		<hr class="hr-primary" />
-    </div>
-
-		<a id="delete-document-btn" href="javascript:void(0);"><i class="fa fa-trash-o text-danger"></i></a>									
-		<a id="add-document-btn" href="#"><i class="fa fa-plus"></i> <i class="fa fa-file-text-o "></i></a>
-                            
-
+<div class="col-sm-9 content">                            
 	<div id="markdown-view-mode">
 		<markdown source="Doc.Content" />
 	</div>
