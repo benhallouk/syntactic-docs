@@ -32,9 +32,24 @@ namespace SyntacticDocs.Controllers
             return View(pageViewModel);
         }
 
+        public Document Add(AddDocumentViewModel addData)
+        {
+            var document = new Document{
+                Alias = addData.Alias,
+                Title = addData.Title,
+                Content = "#"+addData.Title
+            };
+            return _documentService.Add(document, addData.ParentId);
+        }
+
         public Document Save(Document document)
         {
             return _documentService.Save(document);            
+        }
+
+        public Document Delete(Document document)
+        {
+            return _documentService.Delete(document);            
         }
 
         public IActionResult About()

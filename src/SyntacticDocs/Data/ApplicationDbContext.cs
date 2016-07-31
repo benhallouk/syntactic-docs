@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using SyntacticDocs.Models;
+using Npgsql.EntityFrameworkCore.PostgreSQL;
 
 namespace SyntacticDocs.Data
 {
@@ -21,8 +22,7 @@ namespace SyntacticDocs.Data
             {
                 
                 Docs.Add(new Document
-                {
-                    Id = 1L,
+                {                    
                     Alias = "main",
                     Title = "Main",
                     Content = @"# ![SyntacticDocs](/images/docs.png) SyntacticDocs
@@ -42,8 +42,7 @@ Whether it's code snippets, text, diagrams or documents, you need an **easy way 
 #### Share with anyone
 Having the documents and articles in single location makes it **easy to share** them in **secure way**, `SyntacticDocs` help you achieve that using its **modern sharing mechanism** that helps you shape big ideas by collaborating seamlessly with co-workers in a group document.",
                     Documents = new List<Document>{
-                    new Document{
-                        Id = 2L,
+                    new Document{                        
                         Alias = "getting-started",
                         Title = "Getting Started",
                         Content = @"# Getting Started
@@ -60,8 +59,7 @@ Whether it's code snippets, text, diagrams or documents, you need an **easy way 
 #### Share with anyone
 Having the documents and articles in single location makes it **easy to share** them in **secure way**, `SyntacticDocs` help you achieve that using its **modern sharing mechanism** that helps you shape big ideas by collaborating seamlessly with co-workers in a group document."
                     },
-                    new Document{
-                        Id = 3L,
+                    new Document{                        
                         Alias = "markdown-editor",
                         Title = "Markdown Editor",
                         Content = @"# Getting started with markdown editor
@@ -79,8 +77,7 @@ Unordered lists can be started using the toolbar or by typing `* `, `- `, or `+ 
 ## What about images?
 ![Yes](http://i.imgur.com/sZlktY7.png)",
 Documents = new List<Document>{
-                    new Document{
-                        Id = 4L,
+                    new Document{                        
                         Alias = "getting-started",
                         Title = "Getting Started",
                         Content = @"# Getting Started
@@ -97,8 +94,7 @@ Whether it's code snippets, text, diagrams or documents, you need an **easy way 
 #### Share with anyone
 Having the documents and articles in single location makes it **easy to share** them in **secure way**, `SyntacticDocs` help you achieve that using its **modern sharing mechanism** that helps you shape big ideas by collaborating seamlessly with co-workers in a group document."
                     },
-                    new Document{
-                        Id = 5L,
+                    new Document{                        
                         Alias = "markdown-editor",
                         Title = "Markdown Editor",
                         Content = @"# Getting started with markdown editor
@@ -126,10 +122,11 @@ Unordered lists can be started using the toolbar or by typing `* `, `- `, or `+ 
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
-            base.OnModelCreating(builder);
+            base.OnModelCreating(builder);            
             // Customize the ASP.NET Identity model and override the defaults if needed.
             // For example, you can rename the ASP.NET Identity table names and more.
             // Add your customizations after calling base.OnModelCreating(builder);
+            builder.HasPostgresExtension("uuid-ossp");
         }
     }
 }

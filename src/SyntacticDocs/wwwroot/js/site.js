@@ -11,8 +11,25 @@ var syntacticDocs = syntacticDocs || (function () {
         cancelChanges: function(){
             location.reload(true);
         },
+        addDocument: function(){
+            var title = $('#document-title').val();
+            var alias = title.toLowerCase().replace(/ /g,'-').replace(/[^\w-]+/g,'-');
+            var addData = {
+                parentId: syntacticDocs.currentDocument.id,
+                alias: alias,
+                title: title
+            };
+            $.post( "/home/add/", addData,function(data){
+                if(data && data.id) location.reload(true);
+            });
+        },
         saveCurrentDocument: function(){
             $.post( "/home/save/", syntacticDocs.currentDocument,function(data){
+                if(data && data.id) location.reload(true);
+            });
+        },
+        deleteCurrentDocument: function(){
+            $.post( "/home/delete/", syntacticDocs.currentDocument,function(data){
                 if(data && data.id) location.reload(true);
             });
         },
@@ -34,15 +51,21 @@ var syntacticDocs = syntacticDocs || (function () {
                 });            
                 $('#back-to-top').tooltip('show');
                 var markdownEditor = null;
+                $(".add-document a").click(function(){
+                    $('#add-confirmation').modal('show');
+                });
                 $("#edit-document-btn").click(function(){        
                     markdownEditor = markdownEditor || new SimpleMDE({ element: $("#markdown-editor")[0] });
                     if(!$("#markdown-view-mode").is(":visible")){                        
                         syntacticDocs.currentDocument.content = markdownEditor.value();
-                        $('#save-confirmation').modal('show');                        
+                        $('#save-confirmation').modal('show');                  
                     }        
                     $("#markdown-view-mode").toggle();
                     $("#markdown-edit-mode").toggle();
                 });
+                $("#delete-document-btn").click(function(){
+                    $('#delete-confirmation').modal('show');
+                });                
             });
         }
     };

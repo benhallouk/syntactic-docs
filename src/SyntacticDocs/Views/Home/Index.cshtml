@@ -48,7 +48,12 @@
 												<li class="@getMenuItemClassByDocument(subDoc)">
 													<a href="/home/index/@subDoc.Alias">@subDoc.Title</a>
 												</li>
-											}					
+											}
+											<li class="add-document">
+												<a href="#">
+													<i class="fa fa-plus"></i> <i class="fa fa-file-text-o "></i>
+												</a>
+											</li>			
 									</ul>
 							</div>
 						</div>			
@@ -59,6 +64,11 @@
 					}
 				</li>
 			}
+			<li class="add-document">
+				<a href="#">
+					<i class="fa fa-plus"></i> <i class="fa fa-file-text-o "></i>
+				</a>
+			</li>
 		}	
 	</ul>  
 </div>
@@ -66,13 +76,15 @@
 <div class="col-sm-9 content">
 
 	<div class="row">        
-        <ol class="breadcrumb bread-primary ">
-          	<li><i class="fa fa-book"></i> Home</li>
-            <li><a href="#">TOPICS</a></li> 
-			<li><a id="edit-document-btn" href="javascript:void(0);"><i class="fa fa-pencil-square-o"></i></a></li>           
-        </ol>
+		<ol class="breadcrumb bread-primary ">
+			<li><i class="fa fa-book"></i> Home</li>
+			<li><a href="#">TOPICS</a></li> 
+			<li><a id="edit-document-btn" href="javascript:void(0);"><i class="fa fa-pencil-square-o"></i></a></li></li>           
+		</ol>
 		<hr class="hr-primary" />
-    </div>		
+    </div>
+
+		<a id="delete-document-btn" href="javascript:void(0);"><i class="fa fa-trash-o text-danger"></i></a>
 
 	<div id="markdown-view-mode">
 		<markdown source="Doc.Content" />
@@ -84,6 +96,28 @@
 	<a id="back-to-top" href="#" class="btn btn-primary back-to-top" role="button" title="Click to return on the top page" data-toggle="tooltip" data-placement="left"><span class="glyphicon glyphicon-chevron-up"></span></a>
 </div>
 
+<div id="add-confirmation" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="add-confirmation-label">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close" onClick="syntacticDocs.cancelChanges();"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="add-confirmation-label">Add confirmation</h4>
+      </div>
+      <div class="modal-body">
+				You are about to add a new document, do you want to continue?
+				<div class="form-group"> 
+					<label for="document-title" class="control-label">Document title:</label> 
+					<input class="form-control" id="document-title"> 
+				</div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" onClick="syntacticDocs.cancelChanges();" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary" onClick="syntacticDocs.addDocument();">Add document</button>
+      </div>
+    </div>
+  </div>
+</div>
+
 <div id="save-confirmation" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="save-confirmation-label">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
@@ -92,7 +126,7 @@
         <h4 class="modal-title" id="save-confirmation-label">Save confirmation</h4>
       </div>
       <div class="modal-body">
-		You are about to save this document, do you want to continue?
+				You are about to save this document, do you want to continue?
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default" onClick="syntacticDocs.cancelChanges();" data-dismiss="modal">Close</button>
@@ -101,7 +135,26 @@
     </div>
   </div>
 </div>
+
+<div id="delete-confirmation" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="delete-confirmation-label">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close" onClick="syntacticDocs.cancelChanges();"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="delete-confirmation-label">Delete confirmation</h4>
+      </div>
+      <div class="modal-body">
+				You are about to delete this document, do you want to continue?
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" onClick="syntacticDocs.cancelChanges();" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary" onClick="syntacticDocs.deleteCurrentDocument();">Delete Document</button>
+      </div>
+    </div>
+  </div>
+</div>
+
 @section scripts
 {
-	<script>syntacticDocs.currentDocument = {id: @Model.Doc?.Id,content: ""}</script>
+	<script>syntacticDocs.currentDocument = {id: '@Model.Doc?.Id',content: ""}</script>
 }

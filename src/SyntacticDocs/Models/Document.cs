@@ -1,10 +1,13 @@
+using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace SyntacticDocs.Models
 {
     public class Document
-    {
-        public long Id { get; set; }
+    {        
+        [Key]
+        public Guid Id { get; set; }
         public string Alias { get; set; }
         public string Title { get; set; }
         public string Content { get; set; }

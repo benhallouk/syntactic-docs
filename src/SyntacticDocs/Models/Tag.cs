@@ -1,8 +1,12 @@
+using System;
+using System.ComponentModel.DataAnnotations;
+
 namespace SyntacticDocs.Models
 {
     public class Tag
-    {
-        public long Id { get; set; }
+    {        
+        [Key]
+        public Guid Id { get; set; }
         public string Title { get; set; }       
     }
 }

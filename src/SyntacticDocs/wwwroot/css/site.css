@@ -81,20 +81,24 @@ body {
     }
 }
 .sidebar .nav a {
-    color: #e59a0c;
+    color: #fff;
     padding-top: 4px;
     padding-bottom: 4px;
     font-weight: bold;
 }
 .sidebar .nav a:hover, .sidebar .nav a:active, .sidebar .nav a:focus {
     background: transparent !important;
-    color: #1aa9a3;
+    color: #e59a0c;
     border-radius: 0;
 }
 .sidebar .nav .active a, .sidebar .nav .active a:active, .sidebar .nav .active a:focus {
     background: transparent !important;
-    color: #1aa9a3 !important;
+    color: #e59a0c !important;
     border-radius: 0;
+}
+.sidebar .add-document a{
+    color: #1aa9a3;
+    font-size: 20px;
 }
 .sidebar .navbar-nav{
     width: 100%;
@@ -116,7 +120,7 @@ body {
 .sidebar #dropdown .panel-body .navbar-nav li{
     padding-left: 15px;
 }
-.sidebar #dropdown i{
+.sidebar #dropdown .fa-long-arrow-down{
     position: absolute;
     right: 10px;
     top: 8px;
@@ -164,6 +168,13 @@ hr {
     color: #1aa9a3;
 }
 
+#delete-document-btn{
+    font-size: 30px;
+    position: absolute;
+    right: 100px;
+    top: 100px;
+}
+
 h1, h2, h3, h4, h5, h6 {
     font-weight: normal;
     color:#5896c9;
@@ -188,6 +199,10 @@ pre {
 
 .full-content {
     margin: 40px 100px 10px 100px;
+}
+
+.text-danger {
+    color: #c7254e;
 }
 
 .back-to-top {
@@ -245,6 +260,28 @@ pre {
 
 .modal-header {    
     border-bottom: none;
+    background: #1aa9a3;
+}
+#add-confirmation .modal-header{
+    background: #5896c9;
+}
+#add-confirmation label{
+    color: #5896c9;
+    margin-top: 20px;
+}
+#add-confirmation .btn-primary{
+    background: #5896c9;
+}
+#add-confirmation .btn-primary:hover{
+    background: #1aa9a3;
+}
+#delete-confirmation .modal-header{
+    background: #c7254e;
+}
+#delete-confirmation .btn-primary{
+    background: #c7254e;
+}
+#delete-confirmation .btn-primary:hover{
     background: #1aa9a3;
 }
 .modal-header .close {    
