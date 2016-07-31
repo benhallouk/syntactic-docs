@@ -1,12 +1,12 @@
 <dataConfig>
   <dataSource driver="org.postgresql.Driver"
      url="jdbc:postgresql://localhost:5432/SyntacticDocs"
-     user="amin"
-     password="P@$$w0rd" />
+     user="user"
+     password="password" />
   <document>
     <entity name="Docs" query='SELECT * FROM public."Docs";'>
       <field column="Title" name="title" />
-      <field column="Alias" name="title" />
+      <field column="Alias" name="alias" />
       <field column="Content" name="content" />
     </entity>
   </document>
