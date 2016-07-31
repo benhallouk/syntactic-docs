@@ -51,7 +51,7 @@ var syntacticDocs = syntacticDocs || (function () {
                 });            
                 $('#back-to-top').tooltip('show');
                 var markdownEditor = null;
-                $(".add-document a").click(function(){
+                $("#add-document-btn").click(function(){
                     $('#add-confirmation').modal('show');
                 });
                 $("#edit-document-btn").click(function(){        

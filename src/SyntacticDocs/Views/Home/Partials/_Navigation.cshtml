@@ -1,0 +1,17 @@
+@model IEnumerable<SyntacticDocs.Models.Document>
+
+@{
+    Func<string> getHomeMenuItemClass = ()=>{			
+        return string.IsNullOrEmpty(ViewContext.RouteData.Values["path"] as string) ? "active" : "";
+    };
+}
+<li class="@getHomeMenuItemClass()">
+    <a href="/">Home</a>
+</li>	
+@if(Model!=null)
+{
+    foreach(var doc in Model)
+    {
+        @Html.Partial("~/Views/Home/Partials/_NavigationItem.cshtml",doc)
+    }
+}

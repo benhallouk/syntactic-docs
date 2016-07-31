@@ -1,0 +1,54 @@
+
+@model SyntacticDocs.Models.Document
+
+@{
+    var path = ViewContext.RouteData.Values["path"] as string;
+    Func<Document,string> getMenuItemClassByDocument = (document)=>{                
+        var className = (!string.IsNullOrEmpty(path) && path.EndsWith("/"+document.Alias)) ? "active" : string.Empty;
+        if(document.Documents!=null && document.Documents.Any()){
+            className+=" panel panel-default";
+        }
+        return className;
+    };
+
+    Func<Document,string> getCollapsed = (document)=>{
+        if(string.IsNullOrEmpty(path)) return string.Empty;
+        return path.Contains(document.Alias) ? " in" : string.Empty;
+    };
+
+    Func<Document,string> getUrl = (document)=>{
+        if(string.IsNullOrEmpty(path)) return "/home/index/main/" +  document.Alias;
+        var sagments = path.Split('/');
+        if(sagments.Any(sagment => sagment == document.Alias))
+        {
+            var index = Array.IndexOf(sagments,document.Alias);
+            return "/home/index/" + string.Join("/",sagments.Take(index+1).ToArray());
+        }
+        else
+            return "/home/index/" + ViewContext.RouteData.Values["path"] + "/" + document.Alias;
+    };
+}
+
+<li class="@getMenuItemClassByDocument(Model)" id="dropdown">					
+    @if(Model.Documents!=null && Model.Documents.Any())
+    {        
+        <a href="@getUrl(Model)">						 
+            @Model.Title
+            <i class="fa fa-long-arrow-down" aria-hidden="true"></i>
+        </a>
+        <div id="dropdown-@Model.Alias" class="panel-collapse collapse @getCollapsed(Model)">	
+            <div class="panel-body">
+                    <ul class="nav navbar-nav">
+                            @foreach(var subDoc in Model.Documents)
+                            {
+                                @Html.Partial("~/Views/Home/Partials/_NavigationItem.cshtml",subDoc)
+                            }			
+                    </ul>
+            </div>
+        </div>			
+    }
+    else
+    {
+        <a href="@getUrl(Model)">@Model.Title</a>
+    }
+</li>

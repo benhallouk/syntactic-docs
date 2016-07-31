@@ -91,14 +91,10 @@ body {
     color: #e59a0c;
     border-radius: 0;
 }
-.sidebar .nav .active a, .sidebar .nav .active a:active, .sidebar .nav .active a:focus {
+.sidebar .nav .active > a, .sidebar .nav .active > a:active, .sidebar .nav .active > a:focus {
     background: transparent !important;
     color: #e59a0c !important;
     border-radius: 0;
-}
-.sidebar .add-document a{
-    color: #1aa9a3;
-    font-size: 20px;
 }
 .sidebar .navbar-nav{
     width: 100%;
@@ -173,6 +169,16 @@ hr {
     position: absolute;
     right: 100px;
     top: 100px;
+}
+#add-document-btn{
+    font-size: 20px;
+    position: absolute;
+    right: 104px;
+    top: 70px;
+    color: #1aa9a3;
+}
+#add-document-btn:hover{
+    text-decoration: none;
 }
 
 h1, h2, h3, h4, h5, h6 {

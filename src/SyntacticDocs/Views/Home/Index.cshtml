@@ -1,17 +1,7 @@
 @model SyntacticDocs.ViewModels.PageViewModel
 
 @{
-    ViewData["Title"] = "Home Page";
-		Func<Document,string> getMenuItemClassByDocument = (document)=>{
-			var className = (document.Alias == (ViewContext.RouteData.Values["path"] as string) ? "active" : "");
-			if(document.Documents!=null && document.Documents.Any()){
-				className+=" panel panel-default";
-			}
-			return className;
-		};
-		Func<string> getHomeMenuItemClass = ()=>{			
-			return string.IsNullOrEmpty(ViewContext.RouteData.Values["path"] as string) ? "active" : "";
-		};
+    ViewData["Title"] = "Home Page";		
 }
 	       
 
@@ -25,51 +15,8 @@
 			<span class="icon-bar"></span>
 			<span class="icon-bar"></span>
 	</button>		
-	<ul class="navbar-collapse collapse nav nav-pills nav-stacked">
-		<li class="@getHomeMenuItemClass()">
-			<a href="/">Home</a>
-		</li>
-		@if(Model.Navigation!=null)
-		{
-			foreach(var doc in Model.Navigation)
-			{
-				<li class="@getMenuItemClassByDocument(doc)" id="dropdown">					
-					@if(doc.Documents!=null && doc.Documents.Any())
-					{
-						<a data-toggle="collapse" href="#dropdown-@doc.Alias">							 
-							@doc.Title
-							<i class="fa fa-long-arrow-down" aria-hidden="true"></i>
-						</a>
-						<div id="dropdown-@doc.Alias" class="panel-collapse collapse">	
-							<div class="panel-body">
-									<ul class="nav navbar-nav">
-											@foreach(var subDoc in doc.Documents)
-											{
-												<li class="@getMenuItemClassByDocument(subDoc)">
-													<a href="/home/index/@subDoc.Alias">@subDoc.Title</a>
-												</li>
-											}
-											<li class="add-document">
-												<a href="#">
-													<i class="fa fa-plus"></i> <i class="fa fa-file-text-o "></i>
-												</a>
-											</li>			
-									</ul>
-							</div>
-						</div>			
-					}
-					else
-					{
-						<a href="/home/index/@doc.Alias">@doc.Title</a>
-					}
-				</li>
-			}
-			<li class="add-document">
-				<a href="#">
-					<i class="fa fa-plus"></i> <i class="fa fa-file-text-o "></i>
-				</a>
-			</li>
-		}	
+	<ul class="navbar-collapse collapse nav nav-pills nav-stacked">	
+		@Html.Partial("~/Views/Home/Partials/_Navigation.cshtml",@Model.Navigation)
 	</ul>  
 </div>
 
@@ -84,7 +31,9 @@
 		<hr class="hr-primary" />
     </div>
 
-		<a id="delete-document-btn" href="javascript:void(0);"><i class="fa fa-trash-o text-danger"></i></a>
+		<a id="delete-document-btn" href="javascript:void(0);"><i class="fa fa-trash-o text-danger"></i></a>									
+		<a id="add-document-btn" href="#"><i class="fa fa-plus"></i> <i class="fa fa-file-text-o "></i></a>
+                            
 
 	<div id="markdown-view-mode">
 		<markdown source="Doc.Content" />
