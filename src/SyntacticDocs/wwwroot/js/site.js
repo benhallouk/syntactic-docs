@@ -57,10 +57,20 @@ var syntacticDocs = syntacticDocs || (function () {
                 $("#add-document-btn").click(function(){
                     $('#add-confirmation').modal('show');
                 });
-                $("#edit-document-btn").click(function(){        
-                    markdownEditor = markdownEditor || new SimpleMDE({ element: $("#markdown-editor")[0] });
+                $("#edit-document-btn").click(function(){
+                    var editorElement = $("#markdown-editor");
+                    var editorElementValue = editorElement.val().replace(/(<pre><code class=")(\w*)(">)([\s\S]*)(<\/code><\/pre>)/m,"```$2 \n $4```");
+                    editorElement.val(editorElementValue);
+
+                    markdownEditor = markdownEditor || new SimpleMDE({ element: editorElement[0] });
                     if(!$("#markdown-view-mode").is(":visible")){                        
-                        syntacticDocs.currentDocument.content = markdownEditor.value();
+                        syntacticDocs.currentDocument.content = markdownEditor.value()
+                        .replace(/`{3}(?:(.*$)\n)?([\s\S]*)`{3}/m, '<pre><code class="$1">$2</code></pre>');
+
+                        var render = markdownEditor.value();
+                        var renderedHTML = markdownEditor.options.previewRender(render);
+                        $("#markdown-view-mode").html(renderedHTML);
+
                         $('#save-confirmation').modal('show');                  
                     }        
                     $("#markdown-view-mode").toggle();
