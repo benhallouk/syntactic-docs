@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using SyntacticDocs.Services;
 using SyntacticDocs.ViewModels;
 using SyntacticDocs.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace SyntacticDocs.Controllers
 {
@@ -32,6 +33,7 @@ namespace SyntacticDocs.Controllers
             return View(pageViewModel);
         }
 
+        [Authorize]
         public Document Add(AddDocumentViewModel addData)
         {
             var document = new Document{
@@ -41,12 +43,14 @@ namespace SyntacticDocs.Controllers
             };
             return _documentService.Add(document, addData.ParentId);
         }
-
+        
+        [Authorize]
         public Document Save(Document document)
         {
             return _documentService.Save(document);            
         }
 
+        [Authorize]
         public Document Delete(Document document)
         {
             return _documentService.Delete(document);            
