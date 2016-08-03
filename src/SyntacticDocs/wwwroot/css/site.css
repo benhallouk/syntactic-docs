@@ -16,6 +16,19 @@ body {
 .navbar-inverse .navbar-nav>li>a, .navbar-inverse .navbar-brand {
     color: #fff;
 }
+.navbar-inverse .btn-link {
+    color: #c7254e;
+    font-weight: bold;
+}
+.navbar-inverse .btn-link:hover {
+    color: #c7254e;
+}
+.navbar-inverse .btn-link:before {
+    content: "\f08b";
+    font: normal normal normal 14px/1 FontAwesome;
+    padding-right: 4px;
+    color: #c7254e;
+}
 
 .sidebar {
     height: 100%;

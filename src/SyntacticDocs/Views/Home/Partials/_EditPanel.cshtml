@@ -1,13 +1,16 @@
-<nav class="navbar navbar-default editbar" role="navigation">
-  <ul class="nav navbar-nav">
-    <li>
-      <a id="edit-document-btn" href="#"><i class="fa fa-pencil-square-o"></i> Edit document</a>          
-    </li>
-    <li>
-      <a id="add-document-btn" href="#"><i class="fa fa-plus"></i> Add document</a>
-    </li>
-    <li>
-      <a id="delete-document-btn" href="#"><i class="fa fa-trash-o text-danger"></i> Delete document</a>
-    </li>
-  </ul>    
-</nav>
+@if(User!=null && User.Identity.IsAuthenticated)
+{
+  <nav class="navbar navbar-default editbar" role="navigation">
+    <ul class="nav navbar-nav">
+      <li>
+        <a id="edit-document-btn" href="#"><i class="fa fa-pencil-square-o"></i> Edit document</a>          
+      </li>
+      <li>
+        <a id="add-document-btn" href="#"><i class="fa fa-plus"></i> Add document</a>
+      </li>
+      <li>
+        <a id="delete-document-btn" href="#"><i class="fa fa-trash-o text-danger"></i> Delete document</a>
+      </li>
+    </ul>    
+  </nav>
+}
